@@ -1,0 +1,94 @@
+CREATE DATABASE CONSULTORIO;
+USE CONSULTORIO;
+
+CREATE TABLE ESPECIALIZACAO (
+ESPECIALIZACAO_ID INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+NOME VARCHAR(50) NOT NULL,
+SALARIO INT NOT NULL
+);
+
+CREATE TABLE AGENDAMENTO (
+AGENDAMENTO_ID INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+DATA DATE NOT NULL,
+HORARIO VARCHAR(30) NOT NULL,
+ID_cliente INT,
+FOREIGN KEY (ID_cliente) REFERENCES agendamento (AGENDAMENTO_ID)
+);
+
+CREATE TABLE ENDERECO(
+ENDERECO_ID INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+NUMERO VARCHAR(30) NOT NULL,
+COMPLEMENTO VARCHAR(30) NOT NULL,
+CEP VARCHAR(30) NOT NULL
+);
+
+CREATE TABLE CONTATO(
+CONTATO_ID INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+TELEFONE INT NOT NULL,
+EMAIL VARCHAR(30) NOT NULL
+);
+
+CREATE TABLE FUNCIONARIO(
+CPF INT PRIMARY KEY NOT NULL,
+NOME VARCHAR(50) NOT NULL,
+RG CHAR(11) NOT NULL,
+SETOR VARCHAR(30) NOT NULL,
+ID_telefone INT,
+FOREIGN KEY (ID_telefone) REFERENCES contato (contato_ID),
+ID_endereco INT,
+FOREIGN KEY (ID_endereco) REFERENCES endereco (endereco_ID)
+);
+  
+CREATE TABLE DOUTOR(
+CPF INT PRIMARY KEY NOT NULL,
+NOME VARCHAR(50) NOT NULL,
+RG CHAR(11) NOT NULL,
+SETOR VARCHAR(30) NOT NULL,
+ID_telefone INT,
+FOREIGN KEY (ID_telefone) REFERENCES contato (contato_ID),
+ID_endereco INT,
+FOREIGN KEY (ID_endereco) REFERENCES endereco (endereco_ID)
+);
+
+
+
+CREATE TABLE CLIENTE( 
+CPF INT PRIMARY KEY NOT NULL,
+NOME VARCHAR(50) NOT NULL,
+NASCIMENTO DATETIME NOT NULL,
+ID_telefone INT,
+FOREIGN KEY (ID_telefone) REFERENCES contato (contato_ID),
+ID_numero INT,
+FOREIGN KEY(ID_numero) REFERENCES endereco (endereco_ID) 
+SENHA CHAR(6) NOT NULL,
+CONVENIO VARCHAR(30) NOT NULL,
+SEXO CHAR(6) NOT NULL
+); 
+
+ --------
+create database consultorio;
+
+use consultorio;
+
+create table cliente(
+id_cliente int primary key auto_increment,
+cpf varchar(11) not null,
+nome varchar(50) not null,
+nascimento date not null,
+telefone varchar(11) not null,
+email varchar(50) not null,
+cep int (11) not null,
+senha char(10) not null,
+convenio varchar(30) not null,
+sexo char(6) not null,
+numero int(11) not null
+);
+
+create table agendamento(
+    id_agendamento int primary key auto_increment,
+    tratamento varchar(50) not null,
+    Doutor varchar(100) not null,
+    data_consulta date not null,
+    hora_consulta time not null
+);
+
